@@ -99,3 +99,5 @@ ITEM_PIPELINES = {
 
 FEED_FORMAT = 'csv'
 FEED_URI = 'final_jobs.csv'
+
+LOG_LEVEL = 'DEBUG'

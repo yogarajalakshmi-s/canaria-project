@@ -6,6 +6,11 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '../infra'))
+
 from infra.mongo_connector import MongoDBConnector
 from infra.redis_connector import RedisConnector
 import scrapy
@@ -16,7 +21,8 @@ class JobsProjectPipeline:
         self.collection = self.mongo.collection
 
     def process_item(self, item, spider):
-        self.collection.insert_one(item)
+        if not self.collection.find_one({"job_id": item.get("job_id")}):
+            self.collection.insert_one(dict(item))
         return item
 
 class RedisPipeline:
