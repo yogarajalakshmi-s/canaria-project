@@ -1,14 +1,12 @@
-version: '3.8'
-
 services:
   scrapy:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     volumes:
-      - .:/app
+      - ./:/app
     working_dir: /app/jobs_project
-    command: [ "scrapy", "crawl", "json_spider" ]
+    command: ["tail", "-f", "/dev/null"]
     depends_on:
       - mongo
     environment:
@@ -21,6 +19,7 @@ services:
       - "27017:27017"
 
   redis:
-    image: redis:7
+    image: redis:latest
+    container_name: redis
     ports:
       - "6379:6379"

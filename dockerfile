@@ -3,8 +3,10 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Install dependencies
-COPY . /app
+COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
-CMD ["scrapy", "crawl", "job_spider"]
+# Copy all necessary files
+COPY . /app
+
+CMD ["scrapy", "crawl", "json_spider"]
