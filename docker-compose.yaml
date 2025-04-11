@@ -7,6 +7,8 @@ services:
       dockerfile: dockerfile
     volumes:
       - .:/app
+    working_dir: /app/jobs_project
+    command: [ "scrapy", "crawl", "json_spider" ]
     depends_on:
       - mongo
     environment:

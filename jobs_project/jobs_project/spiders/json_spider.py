@@ -4,7 +4,7 @@ import scrapy
 from pymongo import MongoClient
 
 class JSONSpider(scrapy.Spider):
-    name = 'json_spider'
+    name = 'JSONSpider'
 
     def start_requests(self):
         mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017")
