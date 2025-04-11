@@ -25,14 +25,20 @@ class JobsProjectPipeline:
             self.collection.insert_one(dict(item))
         return item
 
+
 class RedisPipeline:
     def __init__(self):
         self.redis = RedisConnector()
 
     def process_item(self, item, spider):
         unique_key = item.get("job_id")
+
+        if not unique_key:
+            raise scrapy.exceptions.DropItem(f"Missing or invalid 'job_id' in item: {item}")
+
         if self.redis.is_duplicate(unique_key):
             raise scrapy.exceptions.DropItem(f"Duplicate item found: {unique_key}")
         else:
             self.redis.mark_as_scraped(unique_key)
             return item
+

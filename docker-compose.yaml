@@ -5,8 +5,10 @@ services:
     build: .
     depends_on:
       - mongodb
+      - redis
     environment:
       - MONGO_URI=mongodb://mongodb:27017
+      - REDIS_URL=redis://redis:6379
       - PYTHONPATH=/app:/app/jobs_project:/app/infra
     volumes:
       - .:/app

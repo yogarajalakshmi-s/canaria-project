@@ -93,11 +93,14 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
 ITEM_PIPELINES = {
-    'jobs_project.pipelines.RedisPipeline': 200,
-    'jobs_project.pipelines.JobsProjectPipeline': 300,
+    'jobs_project.pipelines.RedisPipeline': 1,
+    'jobs_project.pipelines.JobsProjectPipeline': 2,
 }
 
 FEED_FORMAT = 'csv'
 FEED_URI = 'final_jobs.csv'
 
 LOG_LEVEL = 'DEBUG'
+
+REDIS_URL = "redis://localhost:6379"
+
